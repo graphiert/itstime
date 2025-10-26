@@ -21,15 +21,6 @@ class Dashboard extends Component
   // Sort and filter
   public $sortView = 'latest';
   public $filterStatus = 'all';
-  public function filterAll() { $this->filterStatus = 'all'; }
-  public function filterDone() { $this->filterStatus = 'done'; }
-  public function filterOngoing() { $this->filterStatus = 'ongoing'; }
-  public function filterOverdue() { $this->filterStatus = 'overdue'; }
-  public function filterLate() { $this->filterStatus = 'late'; }
-  public function sortLatest() { $this->sortView = 'latest'; }
-  public function sortOldest() { $this->sortView = 'oldest'; }
-  public function sortNearest() { $this->sortView = 'nearest'; }
-  public function sortFarthest() { $this->sortView = 'farthest'; }
   
   // Form
   public StoreTask $form;
