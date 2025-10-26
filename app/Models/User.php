@@ -23,6 +23,8 @@ class User extends Authenticatable
         'username',
         'discord_id',
         'channel_id',
+        'guild_id',
+        'channel_name',
         'avatar',
         'email',
         'password',

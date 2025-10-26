@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('discord_id')->unique();
             $table->string('channel_id')->nullable();
+            $table->string('guild_id')->nullable();
+            $table->string('channel_name')->nullable();
             $table->string('email')->unique()->nullable();
             $table->string('avatar')->nullable();
             $table->string('password');

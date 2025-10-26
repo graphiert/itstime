@@ -19,7 +19,8 @@ class TaskFactory extends Factory
         return [
             'title' => fake()->sentence(),
             'description' => fake()->paragraph(2),
-            'due' => fake()->dateTimeBetween('now', '+2 weeks'),
+            'due' => fake()->dateTimeBetween('-2 weeks', '+2 weeks'),
+            'done' => fake()->dateTimeBetween('-1 week', '+4 weeks'),
             'user_id' => 1,
         ];
     }

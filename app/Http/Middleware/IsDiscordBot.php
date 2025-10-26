@@ -15,7 +15,7 @@ class IsDiscordBot
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->header('X-BOT-TOKEN') !== env('DISCORD_BOT_TOKEN')) {
+        if ($request->header('X-SECRET') !== env('DISCORD_API_SECRET')) {
             abort(403);
         }
         return $next($request);
