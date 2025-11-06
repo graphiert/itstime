@@ -3,14 +3,14 @@
     <flux:heading size="xl" level="1">Hello, {{ $user->name }}</flux:heading>
     <flux:text>Welcome to ItsTime Dashboard.</flux:text>
   </header>
-  <main class="my-4 container">
+  <main class="my-4 max-w-xl">
     @if(!isset($user->channel_id))
     <div class="my-2">
       <flux:callout color="blue" icon="bell-alert">
         <flux:callout.heading>Destination channel has not set.</flux:callout.heading>
         <flux:callout.text>
             Check settings to configure your destination channel.
-            <flux:callout.link wire:navigate href="/settings">Learn more</flux:callout.link>
+            <flux:callout.link wire:navigate :href="route('settings')">Learn more</flux:callout.link>
         </flux:callout.text>
       </flux:callout>
     </div>
@@ -39,8 +39,9 @@
     
     <flux:separator variant="subtle" />
     
-    <div class="flex flex-row my-4 w-full gap-2">
-      <flux:input icon="magnifying-glass" placeholder="Search tasks..." wire:model.live="term" />
+    <div class="flex flex-row my-4 mb-6 w-full gap-2">
+      <flux:input icon="magnifying-glass" placeholder="Search tasks..." wire:model.live.debounce.500ms="term" />
+
       <flux:dropdown>
         <flux:button icon:trailing="chevron-down">
           {{ str()->ucfirst($filterStatus) }}
@@ -58,6 +59,7 @@
           </flux:menu.radio.group>
         </flux:menu>
       </flux:dropdown>
+
       <flux:dropdown>
         <flux:button icon:trailing="chevron-down">
           {{ str()->ucfirst($sortView) }}
@@ -82,26 +84,14 @@
       <flux:callout>
         <div class="flex flex-col gap-4 p-2">
           <span class="text-sm font-medium flex w-full gap-2 items-center">
-          @if(isset($task->done))
-            @if($task->done->gt($task->due))
-            <flux:badge size="sm" variant="pill" color="orange">Late</flux:badge>
-            @else
-            <flux:badge size="sm" variant="pill" color="green">Done</flux:badge>
-            @endif
-          @else
-            @if(now()->gt($task->due))
-            <flux:badge size="sm" variant="pill" color="red">Overdue</flux:badge>
-            @else
-            <flux:badge size="sm" variant="pill" color="orange">Ongoing</flux:badge>
-            @endif
-          @endif
+            <x-state-task :task="$task" />
             <flux:text>
               {{$task->due->isCurrentYear() ?
                 $task->due->format('M d, H:i') :
                 $task->due->format('M d, Y, H:i') }}
             </flux:text>
           </span>
-          <flux:link href="/tasks/{{ $task->id }}" wire:navigate >
+          <flux:link :href="route('tasks.show', $task->id)" wire:navigate >
             <flux:heading size="lg">{{ $task->title }}</flux:heading>
           </flux:link>
           <flux:text>

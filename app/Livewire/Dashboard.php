@@ -27,6 +27,9 @@ class Dashboard extends Component
   
   public function mount()
   {
+    $this->head = session('head') ?? '';
+    $this->message = session('message') ?? '';
+    $this->alertIsShown = session('message') ? true : false;
     $this->user = auth()->user();
     $this->form->due = now()->addHours(2)->format('Y-m-d\TH:i');
   }

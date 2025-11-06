@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -9,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Task extends Model
 {
     /** @use HasFactory<\Database\Factories\TaskFactory> */
+    use HasUlids;
     use HasFactory;
 
     protected $fillable = [
@@ -45,13 +47,13 @@ class Task extends Model
         fn ($query) => $query
       )->when(
         $status == "done",
-        fn ($query) => $query->whereColumn('done', '<=', 'due')
+        fn ($query) => $query->whereColumn('done', '<', 'due')
       )->when(
         $status == "late",
         fn ($query) => $query->whereColumn('done', '>=', 'due')
       )->when(
         $status == "overdue",
-        fn ($query) => $query->where('due', '<=', now())->where('done', null)
+        fn ($query) => $query->where('due', '<', now())->where('done', null)
       )->when(
         $status == "ongoing",
         fn ($query) => $query->where('due', '>=', now())->where('done', null)

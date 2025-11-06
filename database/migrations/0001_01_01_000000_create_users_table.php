@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('channel_id')->nullable();
             $table->string('guild_id')->nullable();
             $table->string('channel_name')->nullable();
-            $table->string('email')->unique()->nullable();
+            $table->string('email')->unique();
             $table->string('avatar')->nullable();
             $table->string('password');
             $table->timestamps();

@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'shirokiyo',
             'username' => 'graphiert',
             'discord_id' => '758832664630919198',
-            'channel_id' => "1016965533016522762",
+            'channel_id' => null,
             'email' => "galihpujiirianto@gmail.com",
             'avatar' => "https://cdn.discordapp.com/avatars/758832664630919198/b4460cc50bdafb73908a5556f3868178.png",
             'password' => Str::random(18)
