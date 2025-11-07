@@ -18,10 +18,10 @@
         </x-slot>
       </flux:callout>
     </div>
-    
+
     <form wire:submit="update" class="flex my-4 flex-col gap-4">
-      <flux:input :disabled="$task->done !== null" label="Title" description="Your new task" placeholder="Task title..." wire:model="form.title" />
-      <flux:textarea :disabled="$task->done !== null" label="Description" description="Extra steps for your task" placeholder="Task description..." wire:model="form.description" />
+      <flux:input :disabled="$task->done !== null" label="Title" placeholder="Task title..." wire:model="form.title" />
+      <flux:textarea :disabled="$task->done !== null" label="Description" placeholder="Task description..." wire:model="form.description" />
       <div class="flex w-full flex-row justify-end gap-4">
         @if($task->done == null)
         <flux:modal.trigger name="mark-done">
@@ -35,14 +35,14 @@
         @endif
       </div>
     </form>
-    
+
     <flux:modal name="mark-done" class="min-w-[22rem]">
       <div class="space-y-6">
         <div>
           <flux:heading size="lg">Mark this task done?</flux:heading>
 
           <flux:text class="mt-2">
-              Once you mark this task done, you can't edit your task details. Only mark done if really done.
+              Once you mark this task done, you can't edit your task details. Only mark done if you really done with that.
           </flux:text>
         </div>
 

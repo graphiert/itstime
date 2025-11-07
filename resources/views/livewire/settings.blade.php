@@ -4,6 +4,16 @@
     <flux:text>Configure your ItsTime preferences.</flux:text>
   </header>
   <main class="my-4 max-w-md">
+    <flux:callout variant="success" icon="check-circle" wire:show="alertIsShown">
+      <flux:callout.heading>{{ $head }}</flux:callout.heading>
+      <flux:callout.text>
+        {{ $message }}
+      </flux:callout.text>
+      <x-slot name="controls">
+        <flux:button icon="x-mark" variant="ghost" @click="$wire.alertIsShown = false" />
+      </x-slot>
+    </flux:callout>
+    
     <section class="my-6 flex flex-col gap-2">
       <flux:heading size="lg">ItsTime theme</flux:heading>
       <flux:text>Set your ItsTime look between light or dark mode.</flux:text>
@@ -35,6 +45,9 @@
         </flux:input.group>
       </div>
       <flux:text>After authorizing the bot, run <span class="font-mono">/setdm</span> on Direct Message or <span class="font-mono">/setchannel</span> on channel you desired and make sure you have permission to manage that server. Otherwise, this command won't work. Refresh this page after running the command.</flux:text>
+      @if($user->guild_id)
+      <flux:switch wire:model.live="everyone" label="Mention everyone" description="If your channel destination on a server, you can activate this to mention everyone on your server." />
+      @endif
     </section>
     
     <flux:separator variant="subtle" />

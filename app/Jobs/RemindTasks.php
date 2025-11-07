@@ -25,7 +25,7 @@ class RemindTasks implements ShouldQueue
     {
         $users = User::whereNotNull('channel_id')->get();
         foreach ($users as $user) {
-            $user->notify(new \App\Notifications\TestNotification($user, true));
+            $user->notify(new \App\Notifications\TestNotification($user, $user->mention_everyone));
         }
     }
 }

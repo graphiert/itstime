@@ -17,7 +17,7 @@ class TestNotification extends Notification implements ShouldQueue
     /**
      * Create a new notification instance.
      */
-    public function __construct(protected User $user)
+    public function __construct(protected User $user, protected bool isEveryone = false)
     {
         //
     }
@@ -38,7 +38,7 @@ class TestNotification extends Notification implements ShouldQueue
     public function toDiscord(object $notifiable)
     {
         return DiscordMessage::create(
-            "DING DONG! <@". $this->user->discord_id. ">",
+            "DING DONG! ". ($this->isEveryone ? "@everyone" : "<@". $this->user->discord_id. ">"),
             [
                 'title' => 'New reminder!',
                 'description' => "<@" .$this->user->discord_id . "> has been requested to notify this.\nThis notification only for testing purposes.\nYou can request to notify again on dashboard.",

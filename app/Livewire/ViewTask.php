@@ -32,7 +32,7 @@ class ViewTask extends Component
   {
     $this->form->validate();
     $this->head = 'Task detail has been updated.';
-    $this->message = 'You have been updated this task details.';
+    $this->message = 'You updated this task details.';
     $this->task->update($this->form->only('title', 'description'));
     $this->alertIsShown = true;
   }
@@ -40,7 +40,7 @@ class ViewTask extends Component
   public function done()
   {
     $this->head = 'This task has been done.';
-    $this->message = 'You have been marked this task done.';
+    $this->message = 'You marked this task done.';
     $this->task->update(['done' => now()]);
     Flux::modal('mark-done')->close();
     $this->alertIsShown = true;

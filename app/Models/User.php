@@ -25,6 +25,7 @@ class User extends Authenticatable
         'channel_id',
         'guild_id',
         'channel_name',
+        'mention_everyone',
         'avatar',
         'email',
         'password',
@@ -49,6 +50,7 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
+            'mention_everyone' => 'boolean',
             'password' => 'hashed',
         ];
     }

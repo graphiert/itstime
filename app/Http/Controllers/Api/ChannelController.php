@@ -80,6 +80,7 @@ class ChannelController extends Controller
     $user->update([
       "channel_id" => $channelId,
       "guild_id" => null,
+      "mention_everyone" => false,
       "channel_name" => $channelName
     ]);
     
